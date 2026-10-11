@@ -25,3 +25,14 @@ Una vez garantizada la conectividad física y de red, el siguiente paso fue habi
   
   ```bash
   ssh usuario@ip_del_servidor
+
+### 3. Securización: Autenticación mediante claves SSH
+Para elevar el nivel de seguridad del entorno y mitigar posibles ataques de fuerza bruta, se ha configurado el acceso exclusivo mediante criptografía asimétrica, eliminando el uso de contraseñas.
+
+- **Generación del par de claves:** Se creó una clave (pública y privada) en el equipo cliente utilizando el comando `ssh-keygen`.
+- **Despliegue de la clave:** Se exportó la clave pública al servidor mediante `ssh-copy-id usuario@ip_del_servidor`, añadiéndola al archivo `authorized_keys`.
+- **Hardening del servicio SSH:** Para hacer efectiva la seguridad, se editó el archivo de configuración del servidor (`/etc/ssh/sshd_config`) estableciendo la directiva `PasswordAuthentication no`.
+- **Aplicación de cambios:** Se reinició el servicio para aplicar la nueva política (`sudo systemctl restart ssh`).
+
+
+Con la infraestructura base de red conectada y el acceso remoto securizado al 100%, el servidor base está completamente operativo. El próximo objetivo será comenzar con la instalación y despliegue de los primeros servicios locales.

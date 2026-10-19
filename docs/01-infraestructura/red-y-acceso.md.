@@ -1,0 +1,29 @@
+# Topología de Red y Acceso Remoto Seguro (SSH)
+
+## Descripción General
+Documentación sobre la configuración del segmento de red local y la implementación del acceso remoto seguro para la administración headless del servidor.
+
+---
+
+## Especificaciones de Hardware y Protocolos
+- **Servidor:** Lenovo ThinkCentre M700 tiny (Ubuntu Server)
+- **Extensor de Red:** Router TP-Link (configurado en modo Punto de Acceso / Bridge)
+- **Protocolos y Servicios:** OpenSSH, TCP/IP, SSH Key-Based Authentication
+
+---
+
+## 1. Reacondicionamiento de Red Secundaria
+Para extender la cobertura de red hasta la ubicación del servidor sin generar interferencias con la pasarela principal, se reconfiguró un router TP-Link en desuso:
+
+- **Desactivación del servidor DHCP:** Evita la presencia de dos servidores DHCP en la misma subred, previniendo colisiones de IP y bucles de red.
+- **Asignación de IP estática:** Se estableció una dirección IP fija para el router secundario fuera del rango del pool DHCP principal, garantizando el acceso continuo a su panel de administración.
+- **Enlace LAN/Bridge:** Interconexión física entre el router principal y el secundario para ofrecer conectividad transparente a los dispositivos cableados.
+
+---
+
+## 2. Configuración e Instalación del Servicio SSH
+Para permitir la administración completa mediante consola remota:
+
+1. **Identificación de la interfaz de red:** Verificación de la IP local asignada al servidor mediante:
+   ```bash
+   ip a
